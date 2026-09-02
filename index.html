@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Mindcart — Mindcarts that check themselves off your mind
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Caveat:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+<link rel="icon" type="image/png" href="./favicon.ico">    <style>
+      :root {
+        --paper: #f3f1e6;
+        --paper-2: #eae6d6;
+        --ink: #23291f;
+        --sage: #3f6350;
+        --sage-light: #dce6dc;
+        --tomato: #e1512b;
+        --butter: #f0b429;
+        --line: #c9c3ae;
+        --radius: 18px;
+        --wrap-pad: 32px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Inter", sans-serif;
+        line-height: 1.5;
+        overflow-x: hidden;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Sora", sans-serif;
+        letter-spacing: -0.02em;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--sage);
+        outline-offset: 3px;
+        border-radius: 6px;
+      }
+      .wrap {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 var(--wrap-pad);
+      }
+      .tag {
+        font-family: "Caveat", cursive;
+        font-size: 1.3rem;
+        color: var(--tomato);
+        display: inline-block;
+        transform: rotate(-3deg);
+      }
+
+      /* NAV */
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 22px 0;
+        position: relative;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 1.02rem;
+        min-width: 0;
+      }
+      .logo-mark {
+        width: 48px;
+        height: 36px;
+        flex: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .logo-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .logo-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .logo-text .subtitle {
+        color: #5b5a4d;
+        font-weight: 500;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        color: #5b5a4d;
+      }
+      .nav-links a:hover {
+        color: var(--ink);
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: none;
+      }
+      .nav-toggle {
+        display: none;
+        flex: none;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        border: 1.5px solid var(--ink);
+        background: transparent;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .nav-toggle svg {
+        width: 20px;
+        height: 20px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 13px 26px;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        border: none;
+        white-space: nowrap;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      .btn-primary {
+        background: var(--ink);
+        color: var(--paper);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 rgba(0, 0, 0, 0.15);
+      }
+      .btn-ghost {
+        background: transparent;
+        border: 1.5px solid var(--ink);
+      }
+      .btn-sm {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 860px) {
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: calc(100% + 8px);
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 4px;
+          background: var(--paper);
+          border: 1px solid var(--line);
+          border-radius: 16px;
+          padding: 10px;
+          box-shadow: 0 16px 30px -12px rgba(35, 41, 31, 0.25);
+          z-index: 50;
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        .nav-links a {
+          padding: 12px 14px;
+          border-radius: 10px;
+        }
+        .nav-links a:hover {
+          background: var(--paper-2);
+        }
+        .nav-toggle {
+          display: flex;
+        }
+      }
+      @media (max-width: 520px) {
+        .nav-actions .btn-primary {
+          padding: 10px 16px;
+          font-size: 0.86rem;
+        }
+        .logo {
+          font-size: 0.92rem;
+        }
+        .logo-text .subtitle {
+          display: none;
+        }
+      }
+
+      /* HERO */
+      .hero {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 40px;
+        align-items: center;
+        padding: 56px 0 90px;
+      }
+      .hero h1 {
+        font-size: clamp(2rem, 4.6vw + 0.6rem, 3.4rem);
+        font-weight: 800;
+        line-height: 1.08;
+        margin-bottom: 22px;
+      }
+      .hero h1 span {
+        color: var(--sage);
+      }
+      .hero p {
+        font-size: 1.1rem;
+        color: #5b5a4d;
+        max-width: 460px;
+        margin-bottom: 34px;
+      }
+      .hero-ctas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 38px;
+      }
+      .hero-note {
+        font-size: 0.85rem;
+        color: #8a876f;
+      }
+      .stat-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 28px 34px;
+      }
+      .stat b {
+        display: block;
+        font-family: "Sora";
+        font-size: 1.5rem;
+      }
+      .stat span {
+        font-size: 0.82rem;
+        color: #8a876f;
+      }
+
+      /* RECEIPT CARD - signature element */
+      .receipt-stage {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        padding: 30px 20px 10px;
+      }
+      .receipt {
+        width: 290px;
+        max-width: 100%;
+        background: #fffdf6;
+        border-radius: 4px;
+        padding: 28px 24px 34px;
+        box-shadow: 0 30px 60px -20px rgba(35, 41, 31, 0.35);
+        transform: rotate(4deg);
+        position: relative;
+      }
+      .receipt::before,
+      .receipt::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 12px;
+        background: radial-gradient(
+            circle at 8px 6px,
+            transparent 6px,
+            #fffdf6 6.5px
+          )
+          repeat-x;
+        background-size: 16px 12px;
+      }
+      .receipt::before {
+        top: -6px;
+        transform: rotate(180deg);
+      }
+      .receipt::after {
+        bottom: -6px;
+      }
+      .receipt-head {
+        font-family: "Caveat";
+        font-size: 1.6rem;
+        font-weight: 700;
+        border-bottom: 2px dashed var(--line);
+        padding-bottom: 10px;
+        margin-bottom: 14px;
+        color: var(--sage);
+      }
+      .r-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 0;
+        font-size: 0.98rem;
+        color: var(--ink);
+        border-bottom: 1px dotted #e3dfcd;
+      }
+      .r-item span {
+        flex: 1;
+      }
+      .r-item .qty {
+        color: #9a9683;
+        font-size: 0.82rem;
+        flex: none;
+      }
+      .box {
+        width: 19px;
+        height: 19px;
+        border: 2px solid var(--sage);
+        border-radius: 5px;
+        flex: none;
+        position: relative;
+      }
+      .box::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFDF6' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+        background-size: 70%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: var(--sage);
+        border-radius: 3px;
+        opacity: 0;
+        transform: scale(0.5);
+        animation: checkIt 6s ease-in-out infinite;
+      }
+      .r-item:nth-child(2) .box::after {
+        animation-delay: 0.6s;
+      }
+      .r-item:nth-child(3) .box::after {
+        animation-delay: 1.5s;
+      }
+      .r-item:nth-child(4) .box::after {
+        animation-delay: 2.4s;
+      }
+      .r-item:nth-child(5) .box::after {
+        animation-delay: 3.3s;
+      }
+      @keyframes checkIt {
+        0%,
+        8% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        14%,
+        70% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        80%,
+        100% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+      }
+      .sticker {
+        position: absolute;
+        background: var(--butter);
+        color: var(--ink);
+        font-family: "Caveat";
+        font-weight: 700;
+        font-size: 1.05rem;
+        padding: 8px 16px;
+        border-radius: 50%;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+        transform: rotate(-9deg);
+      }
+      .sticker.one {
+        top: 0;
+        right: 4%;
+      }
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+          padding-top: 12px;
+        }
+        .receipt-stage {
+          margin-top: 12px;
+        }
+      }
+      @media (max-width: 480px) {
+        .receipt {
+          width: 250px;
+          transform: rotate(2deg);
+          padding: 22px 18px 28px;
+        }
+        .sticker.one {
+          font-size: 0.9rem;
+          padding: 6px 12px;
+          right: 2%;
+        }
+        .stat-row {
+          gap: 18px 26px;
+        }
+        .hero-ctas {
+          flex-direction: column;
+          align-items: stretch;
+          width: 100%;
+        }
+        .hero-ctas .btn {
+          width: 100%;
+        }
+      }
+
+      /* SECTION HEADS */
+      .section {
+        padding: 80px 0;
+      }
+      .section-head {
+        max-width: 560px;
+        margin: 0 auto 56px;
+        text-align: center;
+      }
+      .section-head h2 {
+        font-size: clamp(1.6rem, 3vw + 0.8rem, 2.3rem);
+        font-weight: 800;
+        margin: 10px 0 14px;
+      }
+      .section-head p {
+        color: #5b5a4d;
+        font-size: 1.05rem;
+      }
+      .eyebrow {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--tomato);
+      }
+      @media (max-width: 600px) {
+        .section {
+          padding: 56px 0;
+        }
+        .section-head {
+          margin-bottom: 40px;
+        }
+      }
+
+      /* PROCESS FLOW — aisle path */
+      .flow {
+        position: relative;
+      }
+      .flow-line {
+        position: absolute;
+        top: 34px;
+        left: 6%;
+        right: 6%;
+        height: 0;
+        border-top: 3px dashed var(--line);
+        z-index: 0;
+      }
+      .flow-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        position: relative;
+        z-index: 1;
+      }
+      .flow-step {
+        text-align: center;
+        padding: 0 8px;
+      }
+      .pin {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        background: var(--ink);
+        color: var(--paper);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 22px;
+        font-family: "Sora";
+        font-weight: 800;
+        font-size: 1.3rem;
+        border: 5px solid var(--paper);
+        box-shadow: 0 0 0 3px var(--line);
+      }
+      .flow-step:nth-child(1) .pin {
+        background: var(--sage);
+      }
+      .flow-step:nth-child(2) .pin {
+        background: var(--tomato);
+      }
+      .flow-step:nth-child(3) .pin {
+        background: var(--butter);
+        color: var(--ink);
+      }
+      .flow-step h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+      .flow-step p {
+        font-size: 0.92rem;
+        color: #5b5a4d;
+      }
+      @media (max-width: 700px) {
+        .flow-line {
+          display: none;
+        }
+        .flow-steps {
+          grid-template-columns: 1fr;
+          gap: 30px;
+          max-width: 380px;
+          margin: 0 auto;
+        }
+      }
+
+      /* FEATURES */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+      .feature-card {
+        background: #fffdf6;
+        border: 1px solid var(--paper-2);
+        border-radius: var(--radius);
+        padding: 32px 26px;
+      }
+      .feature-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: var(--sage-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .feature-card h3 {
+        font-size: 1.15rem;
+        margin-bottom: 10px;
+      }
+      .feature-card p {
+        font-size: 0.94rem;
+        color: #5b5a4d;
+      }
+      @media (max-width: 860px) {
+        .features {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 560px) {
+        .features {
+          grid-template-columns: 1fr;
+        }
+        .feature-card {
+          padding: 26px 22px;
+        }
+      }
+
+      /* PHONE PREVIEW */
+      .preview {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 60px;
+        align-items: center;
+      }
+      .phone {
+        width: 260px;
+        height: 520px;
+        padding: 14px;
+        margin: 0 auto;
+        position: relative;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .phone-screen {
+        width: 100%;
+        height: 100%;
+        border-radius: 26px;
+        overflow: hidden;
+        background: var(--paper);
+      }
+      .phone-screen img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+      }
+      .preview-copy h2 {
+        font-size: clamp(1.5rem, 2.6vw + 0.9rem, 2.1rem);
+        margin-bottom: 16px;
+      }
+      .preview-copy p {
+        color: #5b5a4d;
+        margin-bottom: 26px;
+        max-width: 420px;
+      }
+      .check-list {
+        list-style: none;
+      }
+      .check-list li {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+        text-align: left;
+      }
+      .check-list li::before {
+        content: "✓";
+        color: var(--sage);
+        font-weight: 700;
+        flex: none;
+      }
+
+      @media (max-width: 900px) {
+        .preview {
+          grid-template-columns: 1fr;
+          gap: 36px;
+          text-align: center;
+        }
+        .preview-copy p {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .check-list {
+          display: inline-block;
+          text-align: left;
+        }
+      }
+      @media (max-width: 480px) {
+        .phone {
+          width: min(240px, 70vw);
+          height: auto;
+          aspect-ratio: 1 / 2;
+          border-radius: 32px;
+          padding: 10px;
+        }
+        .phone-screen {
+          border-radius: 22px;
+        }
+        .check-list li {
+          font-size: 0.9rem;
+        }
+      }
+
+      /* CTA BANNER */
+      .cta-banner {
+        background: var(--ink);
+        color: var(--paper);
+        border-radius: 28px;
+        padding: 64px 48px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-banner h2 {
+        font-size: clamp(1.5rem, 3.2vw + 0.7rem, 2.2rem);
+        margin-bottom: 14px;
+      }
+      .cta-banner p {
+        color: #c8c5b3;
+        margin-bottom: 30px;
+      }
+      .cta-banner .btn-primary {
+        background: var(--butter);
+        color: var(--ink);
+      }
+      .cta-banner .btn-primary:hover {
+        box-shadow: 0 6px 0 rgba(255, 255, 255, 0.15);
+      }
+      @media (max-width: 600px) {
+        .cta-banner {
+          padding: 44px 24px;
+          border-radius: 22px;
+        }
+      }
+
+      footer {
+        padding: 44px 0 36px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: #8a876f;
+        font-size: 0.88rem;
+        text-align: center;
+      }
+      footer .logo {
+        font-size: 1rem;
+      }
+
+      @media (max-width: 820px) {
+        :root {
+          --wrap-pad: 24px;
+        }
+      }
+      @media (max-width: 480px) {
+        :root {
+          --wrap-pad: 18px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .box::after {
+          animation: none !important;
+        }
+        .btn,
+        .btn-primary,
+        .btn-ghost {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <nav>
+        <div class="logo">
+          <div class="logo-mark">
+            <img src="./logo.png" alt="Mindcart logo" />
+          </div>
+          <span class="logo-text"
+            >Mindcart <span class="subtitle">— Never Forget a Thing</span></span
+          >
+        </div>
+
+        <div class="nav-links" id="navLinks">
+          <a href="#flow">How it works</a>
+          <a href="#features">Features</a>
+          <a href="#preview">Preview</a>
+        </div>
+
+        <div class="nav-actions">
+          <a href="#get" class="btn btn-primary btn-sm">Get the app</a>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <div>
+          <span class="tag">no more "wait, did we need eggs?"</span>
+          <h1>
+            The Mindcart<br />that <span>organizes itself</span><br />while
+            you shop.
+          </h1>
+          <p>
+            Add items in seconds, Mindcart sorts them by aisle
+            automatically, and everyone in your house checks off the same list
+            in real time.
+          </p>
+          <div class="hero-ctas">
+            <a href="#get" class="btn btn-primary"
+              >Start your first list — free</a
+            >
+            <a href="#flow" class="btn btn-ghost">See how it works</a>
+          </div>
+          <div class="stat-row">
+            <div class="stat"><b>3 sec</b><span>to add an item</span></div>
+            <div class="stat"><b>4.9★</b><span>average rating</span></div>
+            <div class="stat"><b>0</b><span>forgotten trips back</span></div>
+          </div>
+        </div>
+
+        <div class="receipt-stage">
+          <div class="sticker one">grab this!</div>
+          <div class="receipt">
+            <div class="receipt-head">Mindcart</div>
+            <div class="r-item">
+              <div class="box"></div>
+              <span>milk</span>
+              <div class="qty">x2</div>
+            </div>
+            <div class="r-item">
+              <div class="box"></div>
+              <span>Bread</span>
+              <div class="qty">x1</div>
+            </div>
+            <div class="r-item">
+              <div class="box"></div>
+              <span>Yogurt</span>
+              <div class="qty">x1</div>
+            </div>
+            <div class="r-item">
+              <div class="box"></div>
+              <span>Toothpaste</span>
+              <div class="qty">x1</div>
+            </div>
+            <div class="r-item">
+              <div class="box"></div>
+              <span>T-shirts</span>
+              <div class="qty">x1</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="section" id="flow">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">The route</span>
+          <h2>From "we need milk" to cart, in four stops</h2>
+          <p>
+            Mindcart follows the same path every shopping trip actually
+            takes.
+          </p>
+        </div>
+        <div class="flow">
+          <div class="flow-line"></div>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="pin">1</div>
+              <h3>Add on the fly</h3>
+              <p>
+                Type, paste, or say an item — from any room, any time it comes
+                to mind.
+              </p>
+            </div>
+            <div class="flow-step">
+              <div class="pin">2</div>
+              <h3>Auto-sorted by aisle</h3>
+              <p>
+                Produce, dairy, pantry — Mindcart groups items the way your
+                store is laid out.
+              </p>
+            </div>
+            <div class="flow-step">
+              <div class="pin">3</div>
+              <h3>Checked in-aisle</h3>
+              <p>
+                Tap to check off as you go, so the list only ever shows what's
+                left.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features" style="background: var(--paper-2)">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Why it sticks</span>
+          <h2>Built for the way lists actually get made</h2>
+          <p>
+            Small details that remove the friction between thinking of something
+            and buying it.
+          </p>
+        </div>
+        <div class="features">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#3F6350"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M9 11l3 3L22 4" />
+                <path
+                  d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"
+                />
+              </svg>
+            </div>
+            <h3>Smart aisle sorting</h3>
+            <p>
+              Mindcart learns your store's layout over time, so lists
+              arrange themselves the way you actually walk the aisles.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" style="background: #fbe7d6">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#E1512B"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                <path d="M16 3.13a4 4 0 010 7.75" />
+              </svg>
+            </div>
+            <h3>One list, whole household</h3>
+            <p>
+              Everyone adds and checks off the same live list — no more texting
+              "did you get the eggs?"
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon" style="background: #fbebc2">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#946B00"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
+                />
+              </svg>
+            </div>
+            <h3>Repeats itself</h3>
+            <p>
+              Buy it twice and Mindcart suggests it next time — your weekly
+              staples fill themselves in.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="preview">
+      <div class="wrap">
+        <div class="preview">
+          <div class="phone">
+            <div class="phone-screen">
+              <img
+                src="./phone-screen.png"
+                alt="Mindcart app showing items grouped by category"
+                class="phone-image"
+              />
+            </div>
+          </div>
+          <div class="preview-copy">
+            <span class="eyebrow">Inside the app</span>
+            <h2>A list that looks the way your kitchen thinks</h2>
+            <p>
+              Grouped by category, lightest possible tap to check off, and
+              always showing what's actually left to grab.
+            </p>
+            <ul class="check-list">
+              <li>Organize items by category</li>
+              <li>Add quantities, units, and prices</li>
+              <li>Add notes to remember important details</li>
+              <li>One tap to mark items as purchased</li>
+              <li>Keep track of your total spending</li>
+              <li>Save your lists directly on your device</li>
+              <li>
+                Works offline, so your list is always available in the store
+              </li>
+              <li>Quickly see what's left to buy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <section class="section" id="get">
+        <div class="cta-banner">
+          <h2>Stop re-buying the mustard you already have.</h2>
+          <p>Free to start. No card required.</p>
+          <a href="#" class="btn btn-primary">Get Mindcart free</a>
+        </div>
+      </section>
+
+      <footer>
+        <div class="logo">Mindcart</div>
+        <div>© 2026 Mindcart. Made for people who shop.</div>
+        <div><a href="./privacy.html" style="text-decoration: underline">Privacy Policy</a></div>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var toggle = document.getElementById("navToggle");
+        var links = document.getElementById("navLinks");
+        if (!toggle || !links) return;
+
+        toggle.addEventListener("click", function () {
+          var isOpen = links.classList.toggle("open");
+          toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
+
+        links.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            links.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        document.addEventListener("click", function (e) {
+          if (!links.classList.contains("open")) return;
+          if (links.contains(e.target) || toggle.contains(e.target)) return;
+          links.classList.remove("open");
+          toggle.setAttribute("aria-expanded", "false");
+        });
+
+        window.addEventListener("resize", function () {
+          if (window.innerWidth > 860 && links.classList.contains("open")) {
+            links.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy — Mindcart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Caveat:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="./favicon.ico" />
+    <style>
+      :root {
+        --paper: #f3f1e6;
+        --paper-2: #eae6d6;
+        --ink: #23291f;
+        --sage: #3f6350;
+        --sage-light: #dce6dc;
+        --tomato: #e1512b;
+        --butter: #f0b429;
+        --line: #c9c3ae;
+        --radius: 18px;
+        --wrap-pad: 32px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Sora", sans-serif;
+        letter-spacing: -0.02em;
+      }
+      a {
+        color: var(--sage);
+        text-decoration: underline;
+      }
+      a.btn,
+      .logo a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--sage);
+        outline-offset: 3px;
+        border-radius: 6px;
+      }
+      .wrap {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 0 var(--wrap-pad);
+      }
+
+      /* NAV */
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 22px 0;
+        max-width: 1160px;
+        margin: 0 auto;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 1.02rem;
+        min-width: 0;
+      }
+      .logo-mark {
+        width: 48px;
+        height: 36px;
+        flex: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .logo-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 13px 26px;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        border: none;
+        white-space: nowrap;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      .btn-ghost {
+        background: transparent;
+        border: 1.5px solid var(--ink);
+      }
+      .btn-sm {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+
+      /* POLICY CONTENT */
+      .policy-hero {
+        padding: 30px 0 10px;
+        text-align: center;
+      }
+      .eyebrow {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--tomato);
+      }
+      .policy-hero h1 {
+        font-size: clamp(1.8rem, 3.4vw + 0.8rem, 2.6rem);
+        font-weight: 800;
+        margin: 10px 0 10px;
+      }
+      .policy-hero .updated {
+        color: #8a876f;
+        font-size: 0.92rem;
+      }
+
+      .policy-card {
+        background: #fffdf6;
+        border: 1px solid var(--paper-2);
+        border-radius: var(--radius);
+        padding: 44px 40px;
+        margin: 40px 0 70px;
+        box-shadow: 0 30px 60px -30px rgba(35, 41, 31, 0.25);
+      }
+      .policy-card > p.intro {
+        color: #5b5a4d;
+        margin-bottom: 8px;
+      }
+      .policy-section {
+        margin-top: 34px;
+      }
+      .policy-section:first-of-type {
+        margin-top: 20px;
+      }
+      .policy-section h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--sage);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+      }
+      .policy-section h2 .num {
+        font-family: "Sora";
+        color: var(--tomato);
+      }
+      .policy-section p {
+        margin-bottom: 12px;
+      }
+      .policy-section ul {
+        list-style: none;
+        margin: 14px 0 14px 4px;
+      }
+      .policy-section ul li {
+        position: relative;
+        padding-left: 22px;
+        margin-bottom: 8px;
+      }
+      .policy-section ul li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--sage);
+        font-weight: 700;
+      }
+      .policy-section a {
+        word-break: break-word;
+      }
+      hr.dashed {
+        border: none;
+        border-top: 2px dashed var(--line);
+        margin: 36px 0;
+      }
+      .policy-copyright {
+        text-align: center;
+        color: #8a876f;
+        font-size: 0.88rem;
+        margin-top: 30px;
+      }
+
+      footer {
+        padding: 30px 0 36px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: #8a876f;
+        font-size: 0.88rem;
+        text-align: center;
+        max-width: 1160px;
+        margin: 0 auto;
+        padding-left: var(--wrap-pad);
+        padding-right: var(--wrap-pad);
+      }
+      footer .logo {
+        font-size: 1rem;
+      }
+
+      @media (max-width: 820px) {
+        :root {
+          --wrap-pad: 24px;
+        }
+      }
+      @media (max-width: 600px) {
+        .policy-card {
+          padding: 30px 22px;
+        }
+      }
+      @media (max-width: 480px) {
+        :root {
+          --wrap-pad: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="./index.html" style="text-decoration: none; color: inherit">
+        <div class="logo">
+          <div class="logo-mark">
+            <img src="./logo.png" alt="Mindcart logo" />
+          </div>
+          <span>Mindcart - Never Forget a Thing</span>
+        </div>
+      </a>
+      <a href="./index.html" class="btn btn-ghost btn-sm">← Back to home</a>
+    </nav>
+
+    <div class="wrap">
+      <div class="policy-hero">
+        <span class="eyebrow">Legal</span>
+        <h1>Privacy Policy</h1>
+        <p class="updated">Last updated: August 29, 2026</p>
+      </div>
+
+      <div class="policy-card">
+        <p class="intro">
+          Mindcart-Never Forget a Thing ("the App") is designed to help you organize and
+          manage your Mindcarts. Your privacy is important to us.
+        </p>
+
+        <div class="policy-section">
+          <h2><span class="num">1.</span> Information We Collect</h2>
+          <p>
+            The App does not directly collect, store, or transmit personal
+            information to our servers.
+          </p>
+          <p>
+            You can use the App without creating an account or providing
+            personal information.
+          </p>
+          <p>
+            The Mindcarts, items, quantities, prices, notes, and related
+            information you enter are stored locally on your device.
+          </p>
+        </div>
+
+        <div class="policy-section">
+          <h2><span class="num">2.</span> Data Stored on Your Device</h2>
+          <p>
+            The App may store information locally on your device, including:
+          </p>
+          <ul>
+            <li>Mindcart names</li>
+            <li>Product/item names</li>
+            <li>Quantities and units</li>
+            <li>Prices</li>
+            <li>Notes</li>
+            <li>Purchased or pending item status</li>
+            <li>Other information you choose to enter into the App</li>
+          </ul>
+          <p>
+            This information remains on your device unless you choose to
+            share, export, or otherwise transfer it using features provided
+            by your device.
+          </p>
+        </div>
+
+        <div class="policy-section">
+          <h2><span class="num">3.</span> Data Sharing</h2>
+          <p>
+            We do not sell, rent, or share your personal information with
+            third parties.
+          </p>
+          <p>The App does not transmit your Mindcart information to us.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2><span class="num">4.</span> Third-Party Services</h2>
+          <p>
+            The App may use third-party services in the future, such as
+            analytics, advertising, authentication, cloud storage, or
+            crash-reporting services.
+          </p>
+          <p>
+            If third-party services are added that collect or process user
+            data, this Privacy Policy will be updated to explain what
+            information is collected and how it is used.
+          </p>
+        </div>
+
+        <div class="policy-section">
+          <h2><span class="num">5.</span> Children's Privacy</h2>
+          <p>
+            The App is not specifically directed toward children under the
+            age of 13. We do not knowingly collect personal information from
+            children.
+          </p>
+        </div>
+
+        <div class="policy-section">
+          <h2><span class="num">6.</span> Security</h2>
+          <p>
+            Because your Mindcart information is stored locally on your
+            device, you are responsible for maintaining the security of your
+            device and protecting access to it.
+          </p>
+        </div>
+
+        <div class="policy-section">
+          <h2><span class="num">7.</span> Changes to This Privacy Policy</h2>
+          <p>
+            We may update this Privacy Policy from time to time. Any changes
+            will be reflected on this page with an updated "Last updated"
+            date.
+          </p>
+        </div>
+
+        <div class="policy-section">
+          <h2><span class="num">8.</span> Contact Us</h2>
+          <p>
+            If you have any questions about this Privacy Policy, you can
+            contact us at:
+          </p>
+          <p>Email: <a href="mailto:YOUR_EMAIL@example.com">[YOUR EMAIL ADDRESS]</a></p>
+        </div>
+
+        <hr class="dashed" />
+        <p class="policy-copyright">© 2026 Mindcart-Never Forget a Thing. All rights reserved.</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <footer>
+        <div class="logo">Mindcart-Never Forget a Thing</div>
+        <div>© 2026 Mindcart. Made for people who shop.</div>
+      </footer>
+    </div>
+  </body>
+</html>
