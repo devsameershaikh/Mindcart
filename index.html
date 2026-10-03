@@ -543,7 +543,7 @@
       /* FEATURES */
       .features {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 22px;
       }
       .feature-card {
@@ -570,7 +570,7 @@
         font-size: 0.94rem;
         color: #5b5a4d;
       }
-      @media (max-width: 860px) {
+      @media (max-width: 1020px) {
         .features {
           grid-template-columns: 1fr 1fr;
         }
@@ -671,6 +671,100 @@
         }
       }
 
+      /* CAROUSEL */
+      .carousel {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        touch-action: pan-y;
+      }
+      .carousel-track {
+        display: flex;
+        height: 100%;
+        transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
+      }
+      .carousel-slide {
+        flex: 0 0 100%;
+        width: 100%;
+        height: 100%;
+      }
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 253, 246, 0.88);
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(35, 41, 31, 0.25);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        z-index: 2;
+      }
+      .carousel:hover .carousel-btn,
+      .carousel:focus-within .carousel-btn {
+        opacity: 1;
+      }
+      .carousel-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+      .carousel-btn.prev {
+        left: 8px;
+      }
+      .carousel-btn.next {
+        right: 8px;
+      }
+      .carousel-dots {
+        position: absolute;
+        bottom: 12px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 7px;
+        z-index: 2;
+      }
+      .carousel-dot {
+        width: 8px;
+        height: 8px;
+        padding: 0;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 253, 246, 0.7);
+        box-shadow: 0 0 0 1px rgba(35, 41, 31, 0.25);
+        cursor: pointer;
+        transition:
+          width 0.25s ease,
+          background 0.25s ease;
+      }
+      .carousel-dot.active {
+        width: 22px;
+        border-radius: 8px;
+        background: var(--tomato);
+      }
+      @media (hover: none) {
+        .carousel-btn {
+          opacity: 1;
+        }
+      }
+
       /* CTA BANNER */
       .cta-banner {
         background: var(--ink);
@@ -735,6 +829,9 @@
         }
         .box::after {
           animation: none !important;
+        }
+        .carousel-track {
+          transition: none !important;
         }
         .btn,
         .btn-primary,
@@ -969,6 +1066,32 @@
               staples fill themselves in.
             </p>
           </div>
+          <div class="feature-card">
+            <div class="feature-icon" style="background: #e3dcf3">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#5B3FA0"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 11l9-8 9 8" />
+                <path d="M5 10v10a1 1 0 001 1h12a1 1 0 001-1V10" />
+                <circle cx="9.5" cy="12.5" r="1.6" />
+                <circle cx="14.5" cy="12.5" r="1.6" />
+                <path d="M7 18c0-1.7 1.1-2.8 2.5-2.8S12 16.3 12 18" />
+                <path d="M12 18c0-1.7 1.1-2.8 2.5-2.8S17 16.3 17 18" />
+              </svg>
+            </div>
+            <h3>Family share</h3>
+            <p>
+              Invite your family with a simple link or code. Everyone sees
+              live updates and who checked off what, from any device.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -978,11 +1101,54 @@
         <div class="preview">
           <div class="phone">
             <div class="phone-screen">
-              <img
-                src="./phone-screen.png"
-                alt="Mindcart app showing items grouped by category"
-                class="phone-image"
-              />
+              <div
+                class="carousel"
+                id="carousel"
+                role="region"
+                aria-roledescription="carousel"
+                aria-label="Mindcart app screenshots"
+              >
+                <div class="carousel-track" id="carouselTrack">
+                  <div class="carousel-slide">
+                    <img
+                      src="./phone-screen-1.png"
+                      alt="Mindcart app showing items grouped by category"
+                      draggable="false"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="./phone-screen-2.png"
+                      alt="Mindcart app screenshot 2"
+                      draggable="false"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="./phone-screen-3.png"
+                      alt="Mindcart app screenshot 3"
+                      draggable="false"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="./phone-screen-4.png"
+                      alt="Mindcart app screenshot 4"
+                      draggable="false"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous screenshot">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+                </button>
+                <button class="carousel-btn next" id="carouselNext" aria-label="Next screenshot">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+                </button>
+                <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Choose screenshot"></div>
+              </div>
             </div>
           </div>
           <div class="preview-copy">
@@ -1003,6 +1169,7 @@
                 Works offline, so your list is always available in the store
               </li>
               <li>Quickly see what's left to buy</li>
+              <li>Family share: invite family to one live, synced list</li>
             </ul>
           </div>
         </div>
@@ -1056,6 +1223,89 @@
             toggle.setAttribute("aria-expanded", "false");
           }
         });
+      })();
+
+      (function () {
+        var carousel = document.getElementById("carousel");
+        var track = document.getElementById("carouselTrack");
+        var dotsWrap = document.getElementById("carouselDots");
+        if (!carousel || !track || !dotsWrap) return;
+
+        var slides = track.children;
+        var total = slides.length;
+        var index = 0;
+        var timer = null;
+        var DELAY = 3500;
+        var reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        for (var i = 0; i < total; i++) {
+          (function (n) {
+            var dot = document.createElement("button");
+            dot.className = "carousel-dot";
+            dot.setAttribute("role", "tab");
+            dot.setAttribute("aria-label", "Go to screenshot " + (n + 1));
+            dot.addEventListener("click", function () {
+              goTo(n);
+              restart();
+            });
+            dotsWrap.appendChild(dot);
+          })(i);
+        }
+        var dots = dotsWrap.children;
+
+        function goTo(n) {
+          index = (n + total) % total;
+          track.style.transform = "translateX(-" + index * 100 + "%)";
+          for (var i = 0; i < total; i++) {
+            dots[i].classList.toggle("active", i === index);
+            dots[i].setAttribute("aria-selected", i === index ? "true" : "false");
+            slides[i].setAttribute("aria-hidden", i === index ? "false" : "true");
+          }
+        }
+        function next() { goTo(index + 1); }
+        function prev() { goTo(index - 1); }
+        function start() {
+          if (reduceMotion || timer) return;
+          timer = setInterval(next, DELAY);
+        }
+        function stop() { clearInterval(timer); timer = null; }
+        function restart() { stop(); start(); }
+
+        document.getElementById("carouselNext").addEventListener("click", function () { next(); restart(); });
+        document.getElementById("carouselPrev").addEventListener("click", function () { prev(); restart(); });
+
+        carousel.addEventListener("mouseenter", stop);
+        carousel.addEventListener("mouseleave", start);
+        carousel.addEventListener("focusin", stop);
+        carousel.addEventListener("focusout", start);
+        carousel.addEventListener("keydown", function (e) {
+          if (e.key === "ArrowRight") { next(); restart(); }
+          if (e.key === "ArrowLeft") { prev(); restart(); }
+        });
+
+        // Swipe support
+        var startX = null;
+        carousel.addEventListener("touchstart", function (e) {
+          startX = e.touches[0].clientX;
+          stop();
+        }, { passive: true });
+        carousel.addEventListener("touchend", function (e) {
+          if (startX === null) return;
+          var dx = e.changedTouches[0].clientX - startX;
+          if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); }
+          startX = null;
+          start();
+        });
+
+        // Pause when the tab is hidden
+        document.addEventListener("visibilitychange", function () {
+          document.hidden ? stop() : start();
+        });
+
+        goTo(0);
+        start();
       })();
     </script>
   </body>
